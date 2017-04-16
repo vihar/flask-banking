@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Posts</title>
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.min.css">
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <style type="text/css">
+      #us{
+        float: right;
+        margin-right: 20px;
+        margin-top: 10px;
+      }
+      #us h3{
+        margin: 0 0 0 0;
+      }
+      .ps{
+        width: 60%;
+        margin-top: 20px;
+        margin-left: 20%
+      }
+      #icon{
+        float: right;
+        margin-top: -15px;
+      }
+      #signout{
+        width: 100px;
+        height: 20px;
+      }
+      #signout a{
+        padding: 2px 0px 2px 20px;
+      }
+    </style>
+  </head>
+<body>
+<div id="us">
+<ul class="nav nav-pills">
+  <li><h3> {{session['current_user']}} &nbsp</h3></li>
+  <li role="presentation" class="active" id="signout"><a href="/logout">Sign Out</a></li>
+ </ul> 
+</div>
+<div>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="">Posts</a></li>
+  <li role="presentation"><a href="/add">Add Posts</a></li>
+  <li role="presentation"><a href="/about_user">About</a></li>
+</ul>
+</div>
+{% for i in accs %}
+<h1>{{ i.acc_number }}</h1>
+<h1>{{ i.acc_type }}</h1>
+
+{% endfor %}
+
+<h1>Hello</h1>
+</div>    
+</body>
+</html>
