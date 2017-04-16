@@ -36,14 +36,14 @@ class Posts(db.Model):
 
 class Accounts(db.Model):
     pid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    acc_number = db.Column(db.Integer())
+    acc_number = db.Column(db.String())
     acc_type = db.Column(db.String())
-    first_deposit = db.Column(db.Integer())
+    first_deposit = db.Column(db.String())
     auid = db.Column(db.Integer, db.ForeignKey('user.uid'))
 
-    def __init__(self, account_number, account_type, first_deposit, puid):
-        self.account_number = account_number
-        self.account_type = account_type
+    def __init__(self, acc_number, acc_type, first_deposit, puid):
+        self.acc_number = acc_number
+        self.acc_type = acc_type
         self.first_deposit = first_deposit
         self.puid = puid
 

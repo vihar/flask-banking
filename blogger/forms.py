@@ -46,6 +46,6 @@ class AboutUserForm(Form):
 
 
 class AddAccForm(Form):
-    acc_number = IntegerField('Acc Number')
+    acc_number = TextField('Acc Number')
     acc_type = TextField('Acc Type')
-    first_deposit = IntegerField('Deposit')
+    first_deposit = TextField('Deposit')

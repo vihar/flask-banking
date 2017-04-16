@@ -50,16 +50,45 @@ def add_post():
 def add_acc():
     if session['user_available']:
         accdetails = AddAccForm(request.form)
+        print(accdetails.acc_number.data)
         us = User.query.filter_by(username=session['current_user']).first()
         if request.method == 'POST':
-            bp = Accounts(accdetails.acc_number.data,
-                          accdetails.acc_type.data, accdetails.first_deposit.data, us.uid)
+            bp = Accounts(acc_number=accdetails.acc_number.data,
+                          acc_type=accdetails.acc_type.data,
+                          first_deposit=accdetails.first_deposit.data,
+                          puid=us.uid)
             db.session.add(bp)
             db.session.commit()
             return redirect(url_for('show_posts'))
         return render_template('addacc.html', accdetails=accdetails)
     flash('User is not Authenticated')
     return redirect(url_for('index'))
+
+
+@app.route('/mina', methods=['GET', 'POST'])
+def min_from_account():
+    if session['user_available']:
+        if request.method == 'POST':
+            amount = request.args['amount']
+            account_id = request.args['account_id']
+            print(amount, account_id)
+            account = Accounts.query.get(account_id)
+            account.first_deposit = int(account.first_deposit) + int(amount)
+            db.session.commit()
+            return redirect(url_for('acc_view'))
+
+
+@app.route('/adda', methods=['GET', 'POST'])
+def add_from_account():
+    if session['user_available']:
+        if request.method == 'POST':
+            amount = request.args['amount']
+            account_id = request.args['account_id']
+            print(amount, account_id)
+            account = Accounts.query.get(account_id)
+            account.amount = int(account.first_deposit) + int(amount)
+            db.session.commit()
+            return redirect(url_for('acc_view'))
 
 
 @app.route('/delete/<pid>/<post_owner>', methods=('GET', 'POST'))
